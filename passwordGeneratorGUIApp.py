@@ -63,20 +63,25 @@ def generate_password():
         output.insert(END, 'Please select password content characters')
 
 def copy_password():
-    if data:
+    try: 
         window.clipboard_clear()
         window.clipboard_append(data)
         print('Copy successfull')
-    else:
+    except NameError:
         print('No password to copy')
         output.delete(0.0, END)
         output.insert(END, 'No password to copy')
-        
+
+def clear_all():
+    data = None
+    output.delete(0.0, END)
+
 output.place(relx=0.7, rely=0.54, anchor=CENTER)
 passwordLength.place(relx=0.05, rely=0.68)
 
-Button(window, text='Copy\nPassword', width=8, command=copy_password, font='none 10 bold').place(relx=0.69, rely=0.76, anchor=CENTER)
 Button(window, text='Generate\nPassword', width=8, command=generate_password, font='none 10 bold').place(relx=0.21, rely=0.845, anchor=CENTER)
+Button(window, text='Copy\nPassword', width=8, command=copy_password, font='none 10 bold').place(relx=0.67, rely=0.76, anchor=E)
+Button(window, text='Clear\nALL', width=8, command=clear_all, font='none 10 bold').place(relx=0.73, rely=0.76, anchor=W)
 
 #CLOSE
 def close_window():
